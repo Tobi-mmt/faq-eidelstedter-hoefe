@@ -371,6 +371,10 @@
       const faqSections = Array.from(faqContainer.querySelectorAll('.faq-section'));
       const noResultsMessage = document.getElementById('no-results');
 
+      // Search tracking variables
+      let searchDebounceTimer = null;
+      let lastTrackedSearchTerm = '';
+
       const faqData = allFaqItems.map((item, index) => ({
         id: index,
         question: item.querySelector('dt').textContent,
@@ -471,7 +475,28 @@
         noResultsMessage.classList.toggle('hidden', totalMatches > 0);
       }
 
-      searchInput.addEventListener('input', performSearch);
+      function trackSearchWithDebounce(searchTerm) {
+        // Clear existing timer
+        if (searchDebounceTimer) {
+          clearTimeout(searchDebounceTimer);
+        }
+        // Only track if search term is different from last tracked term and has at least 2 characters
+        if (searchTerm.length >= 2 && searchTerm !== lastTrackedSearchTerm) {
+          searchDebounceTimer = setTimeout(() => {
+            // Track the search with Umami
+            if (typeof umami !== 'undefined') {
+              umami.track('faq-search', { searchTerm: searchTerm });
+            }
+            lastTrackedSearchTerm = searchTerm;
+          }, 2500); // 2.5 second debounce
+        }
+      }
+
+      searchInput.addEventListener('input', function () {
+        const searchTerm = searchInput.value.trim();
+        performSearch();
+        trackSearchWithDebounce(searchTerm);
+      });
 
       // --- iCal/Müllkalender Setup ---
       async function loadCalendarData() {
