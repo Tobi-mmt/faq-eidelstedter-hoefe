@@ -51,12 +51,8 @@ open index.html
 
 ### Deployment
 
-The page can be deployed on any static web hosting service:
+The page is automatically deployed by Vercel on every push to the main branch.
 
-- GitHub Pages
-- Netlify
-- Vercel
-- Or simply on a web server
 
 ## 📝 Contributing
 
