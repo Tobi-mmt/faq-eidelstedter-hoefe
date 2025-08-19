@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAQ für Mieter:innen der Eidelstedter Höfe</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/ical.js@1.5.0/build/ical.min.js"></script>
-    <style type="text/tailwindcss">
-        @layer base {
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ für Mieter:innen der Eidelstedter Höfe</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ical.js@1.5.0/build/ical.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style type="text/tailwindcss">
+    @layer base {
             body {
                 @apply font-sans bg-gradient-to-br from-green-50 to-green-100 text-slate-700;
             }
@@ -33,371 +35,544 @@
         }
     </style>
 </head>
+
 <body class="antialiased">
 
-    <div class="container mx-auto max-w-4xl p-4 sm:p-8">
-        
-        <header class="mb-12 text-center">
-            <h1 class="text-3xl sm:text-4xl font-bold text-teal-700 mb-3">Inoffizielle FAQ: Eidelstedter Höfe</h1>
-            <p class="text-lg text-slate-500">Häufig gestellte Fragen und wichtige Informationen von Mietern für Mieter</p>
-        </header>
+  <div class="container mx-auto max-w-4xl p-4 sm:p-8">
 
-        <div class="mb-12 sticky top-4 z-10">
-            <div class="relative">
-                <input type="text" id="searchInput" placeholder="Suchen Sie nach einem Thema (z.B. Heizung, Müll...)" 
-                       class="w-full p-4 border border-slate-300 rounded-xl shadow-lg focus:ring-2 focus:ring-teal-500 focus:outline-none transition-all duration-300">
-                <svg class="absolute right-4 top-1/2 -translate-y-1/2 h-6 w-6 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-            </div>
-        </div>
+    <header class="mb-12 text-center">
+      <h1 class="text-3xl sm:text-4xl font-bold text-teal-700 mb-3">Inoffizielle FAQ: Eidelstedter Höfe</h1>
+      <p class="text-lg text-slate-500">Häufig gestellte Fragen und wichtige Informationen von Mietern für Mieter</p>
+    </header>
 
-        <main id="faq-container" class="space-y-8">
-
-            <section id="heizung" class="faq-section bg-white p-6 sm:p-8 rounded-xl shadow-md transition-all duration-300">
-                <h2 class="text-2xl font-bold border-b-2 border-slate-200 pb-3 mb-6 text-teal-800">Heizung & Warmwasser</h2>
-                <dl class="space-y-8">
-                    <div class="faq-item">
-                        <dt>Was kann ich tun, wenn die Heizung oder das Warmwasser ausfällt?</dt>
-                        <dd>
-                            Man sollte den Ausfall umgehend über das <a href="https://serviceportal.wentzel-dr.de/app/login" target="_blank">Service-Portal (Wentzel-Dr App)</a> melden. Das ist der offizielle Weg, um eine Bearbeitung zu gewährleisten. Außerhalb der Geschäftszeiten kann man die im Treppenhaus ausgehängte Notdienstnummer des Hausmeisters nutzen. Wiederkehrende Ausfälle sind leider bekannt und die Verwaltung arbeitet laut eigener Aussage an einer dauerhaften Lösung. Es ist ratsam, die Ausfallzeiten für eventuelle Mietminderungsansprüche zu dokumentieren.
-                        </dd>
-                    </div>
-                    <div class="faq-item">
-                        <dt>Meine Wohnung wird nicht wärmer als 20-22°C. Ist das normal?</dt>
-                        <dd>
-                            Ja, das scheint im Rahmen der gesetzlichen Vorgaben und des Energiekonzepts des Gebäudes zu liegen. Die Heizanlage ist wohl so ausgelegt, dass eine Raumtemperatur von 20-22°C gewährleistet wird. Insbesondere in den oberen Stockwerken kann es bei sehr kalten Außentemperaturen vorkommen, dass die Zieltemperatur nur knapp erreicht wird. Eine höhere Heizleistung ist laut Verwaltung baulich nicht vorgesehen.
-                        </dd>
-                    </div>
-                    <div class="faq-item">
-                        <dt>Wie bediene ich die Heizungsregler (Thermostate) richtig?</dt>
-                        <dd>
-                            Die Bedienung kann je nach Modell variieren. Grundsätzlich aktiviert man die Heizung durch Drehen des Drehrades und stellt dann die gewünschte Stufe ein. Die Zahlen entsprechen ungefähren Raumtemperaturen (z.B. Stufe 3 ≈ 20°C). Da die Fußbodenheizung sehr träge ist, kann es mehrere Stunden dauern, bis eine Änderung spürbar ist. Eine detaillierte Anleitung findet sich hier: <a href="https://partner.gira.de/data3/24501310.pdf" target="_blank">Gira Regler Anleitung</a>.
-                        </dd>
-                    </div>
-                    <div class="faq-item">
-                        <dt>Der Handtuchheizkörper im Bad wird nicht richtig warm. Woran liegt das?</dt>
-                        <dd>
-                            Der Handtuchheizkörper ist so konzipiert, dass er nur lauwarm wird und primär zum Trocknen von Handtüchern dient, nicht zum Heizen des Raumes. Er ist an den Kreislauf der Fußbodenheizung gekoppelt. Wenn diese nicht aktiv heizt, wird auch der Handtuchheizkörper nicht warm. Falls er dauerhaft kalt bleibt, obwohl die Fußbodenheizung läuft, muss er eventuell entlüftet werden. Dies sollte man als Mangel melden.
-                        </dd>
-                    </div>
-                </dl>
-            </section>
-
-            <section id="sicherheit" class="faq-section bg-white p-6 sm:p-8 rounded-xl shadow-md transition-all duration-300">
-                <h2 class="text-2xl font-bold border-b-2 border-slate-200 pb-3 mb-6 text-teal-800">Türen, Schlüssel & Sicherheit</h2>
-                <dl class="space-y-8">
-                    <div class="faq-item">
-                        <dt>Mein KIWI-Transponder funktioniert nicht an allen Türen (z.B. Müllraum, Fahrradkeller). Was kann ich tun?</dt>
-                        <dd>
-                            Die Freischaltung für bestimmte Bereiche muss individuell durch die Verwaltung erfolgen. Man sollte sich mit der Nummer seines KIWI-Transponders per E-Mail an die Verwaltung (z.B. Frau Edu, Frau Möller) wenden, um die entsprechenden Freischaltungen zu beantragen.
-                        </dd>
-                    </div>
-                    <div class="faq-item">
-                        <dt>Es wurde in Kellerabteile oder Autos in der Tiefgarage eingebrochen. Was wird für die Sicherheit getan?</dt>
-                        <dd>
-                            Die Verwaltung nimmt diese Vorfälle laut eigener Aussage sehr ernst. Eine Installation von Kameras ist rechtlich nur mit Zustimmung aller Mieter:innen möglich. Daher wird an alle appelliert, stets darauf zu achten, dass alle Zugangs- und Zwischentüren fest ins Schloss gezogen werden. Defekte Türen oder Tore sollten umgehend gemeldet werden. Es wird empfohlen, keine Wertgegenstände in den Kellerräumen zu lagern.
-                        </dd>
-                    </div>
-                    <div class="faq-item">
-                        <dt>Wie komme ich in die Tiefgarage, wenn das Rolltor defekt ist oder nicht auf den KIWI reagiert?</dt>
-                        <dd>
-                            Man kann durch die Fußgängertür neben dem Tor gehen. Zwischen den beiden Rolltoren befindet sich ein Schaltkasten, mit dem das Tor manuell per Knopfdruck (Pfeil nach oben) geöffnet werden kann.
-                        </dd>
-                    </div>
-                    <div class="faq-item">
-                        <dt>Wie viele Schlüssel und KIWIs sollte ich erhalten haben?</dt>
-                        <dd>
-                            Die Anzahl scheint je nach Wohnungsgröße zu variieren. Für 3- und 4-Zimmer-Wohnungen wurden meist 3 Schlüssel und 3 KIWIs ausgegeben. Bei 2-Zimmer-Wohnungen können es auch nur 2 sein. Wenn man weniger erhalten hat, als für die Haushaltsgröße notwendig ist, sollte man sich an die Verwaltung wenden. Zusätzliche Schlüssel sind kostenpflichtig.
-                        </dd>
-                    </div>
-                </dl>
-            </section>
-            
-            <section id="ausstattung" class="faq-section bg-white p-6 sm:p-8 rounded-xl shadow-md transition-all duration-300">
-                <h2 class="text-2xl font-bold border-b-2 border-slate-200 pb-3 mb-6 text-teal-800">Wohnungsausstattung & Mängel</h2>
-                <dl class="space-y-8">
-                    <div class="faq-item">
-                        <dt>Die Lüftung im Bad/HWR leuchtet rot. Was bedeutet das?</dt>
-                        <dd>
-                            Ein rotes Licht signalisiert, dass der Filter gereinigt werden muss. Man kann die Abdeckung des Lüfters vorsichtig abnehmen, den Filter entnehmen und unter lauwarmem Wasser auswaschen oder ihn vorsichtig mit einem Staubsauger absaugen. Nach dem Trocknen wieder einsetzen und den kleinen Reset-Knopf drücken, bis das rote Licht erlischt.
-                        </dd>
-                    </div>
-                     <div class="faq-item">
-                        <dt>Mein Kühlschrank bildet an der Rückwand starkes Eis. Ist das normal?</dt>
-                        <dd>
-                            Nein, das deutet auf einen Defekt hin. Dieses Problem ist bei einigen Geräten des verbauten Typs bekannt. Man sollte sich direkt an den Zanker/Electrolux-Kundendienst wenden, um einen Garantiefall zu melden und einen Austausch zu veranlassen.
-                        </dd>
-                    </div>
-                    <div class="faq-item">
-                        <dt>Wie bekomme ich eine passende Front für einen nachträglich eingebauten Geschirrspüler?</dt>
-                        <dd>
-                            Die originalen Küchenfronten kann man über den Hersteller "Hummel Küchen" bestellen. Alternativ haben andere Mieter:innen gute Erfahrungen mit der Front "VALLSTENA" von IKEA gemacht, da der Farbton sehr ähnlich ist.
-                        </dd>
-                    </div>
-                    <div class="faq-item">
-                        <dt>Welche Dübel eignen sich für die Wände?</dt>
-                        <dd>
-                            Für die Leichtbauwände (Gipskarton) eignen sich spezielle Hohlraumdübel oder die Allzweckdübel "Fischer DuoPower". Für die Decken und tragenden Wände (Beton) benötigt man einen Bohrhammer und Betonbohrer.
-                        </dd>
-                    </div>
-                    <div class="faq-item">
-                        <dt>Der Abfluss in meiner Dusche ist verstopft. Wie öffne ich das Gitter?</dt>
-                        <dd>
-                            Das verchromte Gitter sitzt oft sehr fest. Man kann es vorsichtig mit einem stabilen Schraubendreher oder einer Spitzzange an den Kanten heraushebeln. Darunter befindet sich ein kleiner Sieb-Einsatz, den man zur Reinigung entnehmen kann.
-                        </dd>
-                    </div>
-                </dl>
-            </section>
-            
-            <section id="garage" class="faq-section bg-white p-6 sm:p-8 rounded-xl shadow-md transition-all duration-300">
-                <h2 class="text-2xl font-bold border-b-2 border-slate-200 pb-3 mb-6 text-teal-800">Tiefgarage & Außenbereich</h2>
-                <dl class="space-y-8">
-                    <div class="faq-item">
-                        <dt>Mein Auto in der Tiefgarage wird ständig durch Taubenkot verschmutzt. Was wird dagegen unternommen?</dt>
-                        <dd>
-                            Das Taubenproblem ist der Verwaltung bekannt. Es wurden bereits Maßnahmen wie die Installation von Netzen und Spikes beauftragt. Die Arbeiten finden abschnittsweise statt und werden voraussichtlich noch einige Zeit in Anspruch nehmen.
-                        </dd>
-                    </div>
-                    <div class="faq-item">
-                        <dt>Die Decke in der Tiefgarage bröckelt und es sind bereits Steine heruntergefallen. Ist das gefährlich?</dt>
-                        <dd>
-                            Die Verwaltung ist über die Vorfälle informiert. Es handelt sich wohl um Porenbetonsteine zur Verkleidung von Lüftungskanälen, nicht um tragende Decken-Elemente. Die betroffenen Bereiche wurden laut Verwaltung geprüft und gesichert. Neue lose Teile sollten umgehend gemeldet werden.
-                        </dd>
-                    </div>
-                     <div class="faq-item">
-                        <dt>Funktioniert die Außenbeleuchtung (Laternen) auf dem Gelände?</dt>
-                        <dd>
-                             Die Außenbeleuchtung ist ein bekanntes Problem. Aufgrund eines defekten Erdkabels ist die Funktionalität eingeschränkt. Laut Verwaltung ist die Reparatur beauftragt, ein genauer Zeitplan liegt aber noch nicht vor.
-                        </dd>
-                    </div>
-                </dl>
-            </section>
-
-            
-            <section id="muell" class="faq-section bg-white p-6 sm:p-8 rounded-xl shadow-md transition-all duration-300">
-              <h2 class="text-2xl font-bold border-b-2 border-slate-200 pb-3 mb-6 text-teal-800">Müllentsorgung</h2>
-               <dl class="space-y-8">
-                  <div class="faq-item">
-                      <dt>Nächste Abholtermine:</dt>
-                      <dd>
-                          <div id="muell-termine">
-                              <p class="text-slate-500">Lade Termine...</p>
-                          </div>
-                      </dd>
-                  </div>
-                  <div class="faq-item">
-                      <dt>Die Müllcontainer sind ständig voll. Was kann ich tun?</dt>
-                      <dd>
-                          Es wird empfohlen, alle Kartonagen zu falten, um Platz zu sparen. Große Mengen Pappe, insbesondere nach einem Umzug, sollten zu den öffentlichen Containern in der Nachbarschaft gebracht werden (z.B. vor dem Restaurant "Il Tesoro"). Müllsäcke oder Kartons sollten niemals neben die Container gestellt werden, da dies Ungeziefer anzieht.
-                      </dd>
-                  </div>
-                  <div class="faq-item">
-                      <dt>Es sind keine Restmüll- oder Biotonnen im Müllraum. Wo soll ich meinen Müll entsorgen?</dt>
-                      <dd>
-                          Die Tonnen werden von den Hausmeistern zur Leerung in den Bereitstellungsraum an der Straße gebracht. Dies geschieht in der Regel am Vortag der Abholung. Man sollte den Abfuhrkalender prüfen und den Müll für diesen kurzen Zeitraum in der Wohnung lagern.
-                      </dd>
-                  </div>
-              </dl>
-          </section>
-
-            <section id="verwaltung" class="faq-section bg-white p-6 sm:p-8 rounded-xl shadow-md transition-all duration-300">
-                <h2 class="text-2xl font-bold border-b-2 border-slate-200 pb-3 mb-6 text-teal-800">Verwaltung & Kommunikation</h2>
-                 <dl class="space-y-8">
-                    <div class="faq-item">
-                        <dt>Ich erreiche niemanden bei der Verwaltung. Was soll ich tun?</dt>
-                        <dd>
-                            Für Mängelmeldungen und Anfragen sollte primär das <a href="https://serviceportal.wentzel-dr.de/app/login" target="_blank">Wentzel-Dr. Service-Portal</a> genutzt werden, um eine schriftliche Dokumentation zu haben. Telefonisch sind die Mitarbeiterinnen oft nur zu den Sprechzeiten erreichbar. Bei sehr dringenden Fällen, die die Geschäftsführung betreffen, wurde der Kontakt zu Herrn Carsten Jonas (carsten.jonas@wentzel-dr.de) als hilfreich empfunden.
-                        </dd>
-                    </div>
-                    <div class="faq-item">
-                        <dt>Wie registriere ich mich für die Renz-Paketbox?</dt>
-                        <dd>
-                            Die Registrierung erfolgt über einen speziellen Link, der in den Ankündigungen der Community-Gruppe geteilt wurde. Bei der Registrierung muss die Mieternummer als "Apartment-Nummer" angegeben werden. Bei Problemen sollte man sich an die Verwaltung wenden.
-                        </dd>
-                    </div>
-                </dl>
-            </section>
-
-            <div id="no-results" class="hidden text-center py-10">
-                <p class="text-lg text-slate-500">Für Ihre Suche wurden keine Ergebnisse gefunden.</p>
-            </div>
-            
-        </main>
-
-        <footer class="mt-16 pt-8 border-t border-slate-300 text-center text-slate-500 text-sm">
-            <p>&copy; 2025 Ein Nachbar. Dieses Dokument dient der allgemeinen Information und erhebt keinen Anspruch auf Vollständigkeit oder Richtigkeit.</p>
-        </footer>
-
+    <div class="mb-12 sticky top-4 z-10">
+      <div class="relative">
+        <input type="text" id="searchInput" placeholder="Suchen Sie nach einem Thema (z.B. Heizung, Müll...)"
+          class="w-full p-4 border border-slate-300 rounded-xl shadow-lg focus:ring-2 focus:ring-teal-500 focus:outline-none transition-all duration-300">
+        <svg class="absolute right-4 top-1/2 -translate-y-1/2 h-6 w-6 text-slate-400" xmlns="http://www.w3.org/2000/svg"
+          fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+      </div>
     </div>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-          
-          // --- Fuzzy Search Setup ---
-          const searchInput = document.getElementById('searchInput');
-          const faqContainer = document.getElementById('faq-container');
-          const allFaqItems = Array.from(faqContainer.querySelectorAll('.faq-item'));
-          const faqSections = Array.from(faqContainer.querySelectorAll('.faq-section'));
-          const noResultsMessage = document.getElementById('no-results');
+    <main id="faq-container" class="space-y-8">
 
-          const faqData = allFaqItems.map((item, index) => ({
-              id: index,
-              question: item.querySelector('dt').textContent,
-              answer: item.querySelector('dd').textContent,
-              element: item
-          }));
-          
-          const fuseOptions = {
-              keys: ['question', 'answer'],
-              includeScore: true,
-              threshold: 0.4,
-              includeMatches: true,
-              minMatchCharLength: 2,
-          };
-          const fuse = new Fuse(faqData, fuseOptions);
 
-          function highlightMatches(text, matches) {
-              const result = [];
-              let lastIndex = 0;
-              matches.sort((a, b) => a[0] - b[0]);
-              matches.forEach(match => {
-                  const [start, end] = match;
-                  if (start > lastIndex) result.push(text.substring(lastIndex, start));
-                  result.push(`<span class="highlight">${text.substring(start, end + 1)}</span>`);
-                  lastIndex = end + 1;
+      <section id="muell" class="faq-section bg-white p-6 sm:p-8 rounded-xl shadow-md transition-all duration-300">
+        <h2 class="text-2xl font-bold border-b-2 border-slate-200 pb-3 mb-6 text-teal-800">Müllentsorgung</h2>
+        <dl class="space-y-8">
+          <div class="faq-item">
+            <dt>Nächste Abholtermine:</dt>
+            <dd>
+              <div id="muell-termine">
+                <p class="text-slate-500">Lade Termine...</p>
+              </div>
+              <div class="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                <p class="text-sm text-blue-800 font-medium">
+                  💡 <strong>Wichtiger Tipp:</strong> Die Tonnen werden am Vortag der Abholung in den Bereitstellungsraum gebracht.
+                </p>
+              </div>
+              <div class="mt-3 text-center">
+                <a href="https://www.stadtreinigung.hamburg/abfuhrkalender/?tx_srh_pickups%5Bstreet%5D=4990&tx_srh_pickups%5Bhousenumber%5D=372521&tx_srh_pickups%5BisAllowedOwner%5D=1#c3376" 
+                   target="_blank" 
+                   class="inline-flex items-center text-sm text-teal-700 font-semibold hover:text-teal-800 hover:underline">
+                  <i data-lucide="external-link" class="w-4 h-4 mr-1"></i>
+                  Vollständigen Abfuhrkalender anzeigen
+                </a>
+              </div>
+            </dd>
+          </div>
+          <div class="faq-item">
+            <dt>Die Müllcontainer sind ständig voll. Was kann ich tun?</dt>
+            <dd>
+              Es wird empfohlen, alle Kartonagen zu falten, um Platz zu sparen. Große Mengen Pappe, insbesondere nach
+              einem Umzug, sollten zu den öffentlichen <a href="https://www.stadtreinigung.hamburg/entsorgung-recycling/depotcontainer/#c3373" 
+              target="_blank" class="inline-flex items-center text-teal-700 font-semibold hover:underline">
+              <i data-lucide="external-link" class="w-3 h-3 mr-1"></i>
+              Container in der Nachbarschaft</a> gebracht werden (z.B. vor dem
+              <a href="https://maps.app.goo.gl/WqfmWLB7Xz89qaUs5" target="_blank" class="inline-flex items-center text-teal-700 font-semibold hover:underline">
+              <i data-lucide="external-link" class="w-3 h-3 mr-1"></i>
+              Restaurant Il Tesoro</a>). Müllsäcke oder Kartons sollten niemals neben die Container gestellt werden, da
+              dies Ungeziefer anzieht.
+            </dd>
+          </div>
+          <div class="faq-item">
+            <dt>Es sind keine Restmüll- oder Biotonnen im Müllraum. Wo soll ich meinen Müll entsorgen?</dt>
+            <dd>
+              Die Tonnen werden von den Hausmeistern zur Leerung in den Bereitstellungsraum an der Straße gebracht. Dies
+              geschieht in der Regel am Vortag der Abholung. Man sollte den Abfuhrkalender prüfen und den Müll für
+              diesen kurzen Zeitraum in der Wohnung lagern.
+            </dd>
+          </div>
+        </dl>
+      </section>
+
+      <section id="verwaltung" class="faq-section bg-white p-6 sm:p-8 rounded-xl shadow-md transition-all duration-300">
+        <h2 class="text-2xl font-bold border-b-2 border-slate-200 pb-3 mb-6 text-teal-800">Verwaltung & Kommunikation
+        </h2>
+        <dl class="space-y-8">
+          <div class="faq-item">
+            <dt>Ich erreiche niemanden bei der Verwaltung. Was soll ich tun?</dt>
+            <dd>
+                             Für Mängelmeldungen und Anfragen sollte primär das <a href="https://serviceportal.wentzel-dr.de/app/login"
+                 target="_blank" class="inline-flex items-center text-teal-700 font-semibold hover:underline">
+                 <i data-lucide="external-link" class="w-3 h-3 mr-1"></i>
+                 Wentzel-Dr. Service-Portal</a> genutzt werden, um eine schriftliche Dokumentation zu
+              haben. Telefonisch sind die Mitarbeiterinnen oft nur zu den Sprechzeiten erreichbar. Bei sehr dringenden
+              Fällen, die die Geschäftsführung betreffen, wurde der Kontakt zu Herrn Carsten Jonas
+              (carsten.jonas@wentzel-dr.de) als hilfreich empfunden.
+            </dd>
+          </div>
+          <div class="faq-item">
+            <dt>Wie registriere ich mich für die Renz-Paketbox?</dt>
+            <dd>
+              Die Registrierung erfolgt über einen speziellen Link, der in den Ankündigungen der Community-Gruppe
+              geteilt wurde. Bei der Registrierung muss die Mieternummer als "Apartment-Nummer" angegeben werden. Bei
+              Problemen sollte man sich an die Verwaltung wenden.
+            </dd>
+          </div>
+        </dl>
+      </section>
+      
+      <section id="heizung" class="faq-section bg-white p-6 sm:p-8 rounded-xl shadow-md transition-all duration-300">
+        <h2 class="text-2xl font-bold border-b-2 border-slate-200 pb-3 mb-6 text-teal-800">Heizung & Warmwasser</h2>
+        <dl class="space-y-8">
+          <div class="faq-item">
+            <dt>Was kann ich tun, wenn die Heizung oder das Warmwasser ausfällt?</dt>
+            <dd>
+                             Man sollte den Ausfall umgehend über das <a href="https://serviceportal.wentzel-dr.de/app/login"
+                 target="_blank" class="inline-flex items-center text-teal-700 font-semibold hover:underline">
+                 <i data-lucide="external-link" class="w-3 h-3 mr-1"></i>
+                 Service-Portal (Wentzel-Dr App)</a> melden. Das ist der offizielle Weg, um eine
+              Bearbeitung zu gewährleisten. Außerhalb der Geschäftszeiten kann man die im Treppenhaus ausgehängte
+              Notdienstnummer des Hausmeisters nutzen. Wiederkehrende Ausfälle sind leider bekannt und die Verwaltung
+              arbeitet laut eigener Aussage an einer dauerhaften Lösung. Es ist ratsam, die Ausfallzeiten für eventuelle
+              Mietminderungsansprüche zu dokumentieren.
+            </dd>
+          </div>
+          <div class="faq-item">
+            <dt>Meine Wohnung wird nicht wärmer als 20-22°C. Ist das normal?</dt>
+            <dd>
+              Ja, das scheint im Rahmen der gesetzlichen Vorgaben und des Energiekonzepts des Gebäudes zu liegen. Die
+              Heizanlage ist wohl so ausgelegt, dass eine Raumtemperatur von 20-22°C gewährleistet wird. Insbesondere in
+              den oberen Stockwerken kann es bei sehr kalten Außentemperaturen vorkommen, dass die Zieltemperatur nur
+              knapp erreicht wird. Eine höhere Heizleistung ist laut Verwaltung baulich nicht vorgesehen.
+            </dd>
+          </div>
+          <div class="faq-item">
+            <dt>Wie bediene ich die Heizungsregler (Thermostate) richtig?</dt>
+            <dd>
+              Die Bedienung kann je nach Modell variieren. Grundsätzlich aktiviert man die Heizung durch Drehen des
+              Drehrades und stellt dann die gewünschte Stufe ein. Die Zahlen entsprechen ungefähren Raumtemperaturen
+              (z.B. Stufe 3 ≈ 20°C). Da die Fußbodenheizung sehr träge ist, kann es mehrere Stunden dauern, bis eine
+                             Änderung spürbar ist.                Eine detaillierte Anleitung findet sich hier: <a
+                 href="https://partner.gira.de/data3/24501310.pdf" target="_blank" class="inline-flex items-center text-teal-700 font-semibold hover:underline">
+                 <i data-lucide="external-link" class="w-3 h-3 mr-1"></i>
+                 Gira Regler Anleitung</a>.
+            </dd>
+          </div>
+          <div class="faq-item">
+            <dt>Der Handtuchheizkörper im Bad wird nicht richtig warm. Woran liegt das?</dt>
+            <dd>
+              Der Handtuchheizkörper ist so konzipiert, dass er nur lauwarm wird und primär zum Trocknen von Handtüchern
+              dient, nicht zum Heizen des Raumes. Er ist an den Kreislauf der Fußbodenheizung gekoppelt. Wenn diese
+              nicht aktiv heizt, wird auch der Handtuchheizkörper nicht warm. Falls er dauerhaft kalt bleibt, obwohl die
+              Fußbodenheizung läuft, muss er eventuell entlüftet werden. Dies sollte man als Mangel melden.
+            </dd>
+          </div>
+        </dl>
+      </section>
+
+      <section id="sicherheit" class="faq-section bg-white p-6 sm:p-8 rounded-xl shadow-md transition-all duration-300">
+        <h2 class="text-2xl font-bold border-b-2 border-slate-200 pb-3 mb-6 text-teal-800">Türen, Schlüssel & Sicherheit
+        </h2>
+        <dl class="space-y-8">
+          <div class="faq-item">
+            <dt>Mein KIWI-Transponder funktioniert nicht an allen Türen (z.B. Müllraum, Fahrradkeller). Was kann ich
+              tun?</dt>
+            <dd>
+              Die Freischaltung für bestimmte Bereiche muss individuell durch die Verwaltung erfolgen. Man sollte sich
+              mit der Nummer seines KIWI-Transponders per E-Mail an die Verwaltung (z.B. Frau Edu, Frau Möller) wenden,
+              um die entsprechenden Freischaltungen zu beantragen.
+            </dd>
+          </div>
+          <div class="faq-item">
+            <dt>Es wurde in Kellerabteile oder Autos in der Tiefgarage eingebrochen. Was wird für die Sicherheit getan?
+            </dt>
+            <dd>
+              Die Verwaltung nimmt diese Vorfälle laut eigener Aussage sehr ernst. Eine Installation von Kameras ist
+              rechtlich nur mit Zustimmung aller Mieter:innen möglich. Daher wird an alle appelliert, stets darauf zu
+              achten, dass alle Zugangs- und Zwischentüren fest ins Schloss gezogen werden. Defekte Türen oder Tore
+              sollten umgehend gemeldet werden. Es wird empfohlen, keine Wertgegenstände in den Kellerräumen zu lagern.
+            </dd>
+          </div>
+          <div class="faq-item">
+            <dt>Wie komme ich in die Tiefgarage, wenn das Rolltor defekt ist oder nicht auf den KIWI reagiert?</dt>
+            <dd>
+              Man kann durch die Fußgängertür neben dem Tor gehen. Zwischen den beiden Rolltoren befindet sich ein
+              Schaltkasten, mit dem das Tor manuell per Knopfdruck (Pfeil nach oben) geöffnet werden kann.
+            </dd>
+          </div>
+          <div class="faq-item">
+            <dt>Wie viele Schlüssel und KIWIs sollte ich erhalten haben?</dt>
+            <dd>
+              Die Anzahl scheint je nach Wohnungsgröße zu variieren. Für 3- und 4-Zimmer-Wohnungen wurden meist 3
+              Schlüssel und 3 KIWIs ausgegeben. Bei 2-Zimmer-Wohnungen können es auch nur 2 sein. Wenn man weniger
+              erhalten hat, als für die Haushaltsgröße notwendig ist, sollte man sich an die Verwaltung wenden.
+              Zusätzliche Schlüssel sind kostenpflichtig.
+            </dd>
+          </div>
+        </dl>
+      </section>
+
+      <section id="ausstattung"
+        class="faq-section bg-white p-6 sm:p-8 rounded-xl shadow-md transition-all duration-300">
+        <h2 class="text-2xl font-bold border-b-2 border-slate-200 pb-3 mb-6 text-teal-800">Wohnungsausstattung & Mängel
+        </h2>
+        <dl class="space-y-8">
+          <div class="faq-item">
+            <dt>Die Lüftung im Bad/HWR leuchtet rot. Was bedeutet das?</dt>
+            <dd>
+              Ein rotes Licht signalisiert, dass der Filter gereinigt werden muss. Man kann die Abdeckung des Lüfters
+              vorsichtig abnehmen, den Filter entnehmen und unter lauwarmem Wasser auswaschen oder ihn vorsichtig mit
+              einem Staubsauger absaugen. Nach dem Trocknen wieder einsetzen und den kleinen Reset-Knopf drücken, bis
+              das rote Licht erlischt.
+            </dd>
+          </div>
+          <div class="faq-item">
+            <dt>Mein Kühlschrank bildet an der Rückwand starkes Eis. Ist das normal?</dt>
+            <dd>
+              Nein, das deutet auf einen Defekt hin. Dieses Problem ist bei einigen Geräten des verbauten Typs bekannt.
+              Man sollte sich direkt an den Zanker/Electrolux-Kundendienst wenden, um einen Garantiefall zu melden und
+              einen Austausch zu veranlassen.
+            </dd>
+          </div>
+          <div class="faq-item">
+            <dt>Wie bekomme ich eine passende Front für einen nachträglich eingebauten Geschirrspüler?</dt>
+            <dd>
+              Die originalen Küchenfronten kann man über den Hersteller "Hummel Küchen" bestellen. Alternativ haben
+              andere Mieter:innen gute Erfahrungen mit der Front "VALLSTENA" von IKEA gemacht, da der Farbton sehr
+              ähnlich ist.
+            </dd>
+          </div>
+          <div class="faq-item">
+            <dt>Welche Dübel eignen sich für die Wände?</dt>
+            <dd>
+              Für die Leichtbauwände (Gipskarton) eignen sich spezielle Hohlraumdübel oder die Allzweckdübel "Fischer
+              DuoPower". Für die Decken und tragenden Wände (Beton) benötigt man einen Bohrhammer und Betonbohrer.
+            </dd>
+          </div>
+          <div class="faq-item">
+            <dt>Der Abfluss in meiner Dusche ist verstopft. Wie öffne ich das Gitter?</dt>
+            <dd>
+              Das verchromte Gitter sitzt oft sehr fest. Man kann es vorsichtig mit einem stabilen Schraubendreher oder
+              einer Spitzzange an den Kanten heraushebeln. Darunter befindet sich ein kleiner Sieb-Einsatz, den man zur
+              Reinigung entnehmen kann.
+            </dd>
+          </div>
+        </dl>
+      </section>
+
+      <section id="garage" class="faq-section bg-white p-6 sm:p-8 rounded-xl shadow-md transition-all duration-300">
+        <h2 class="text-2xl font-bold border-b-2 border-slate-200 pb-3 mb-6 text-teal-800">Tiefgarage & Außenbereich
+        </h2>
+        <dl class="space-y-8">
+          <div class="faq-item">
+            <dt>Mein Auto in der Tiefgarage wird ständig durch Taubenkot verschmutzt. Was wird dagegen unternommen?</dt>
+            <dd>
+              Das Taubenproblem ist der Verwaltung bekannt. Es wurden bereits Maßnahmen wie die Installation von Netzen
+              und Spikes beauftragt. Die Arbeiten finden abschnittsweise statt und werden voraussichtlich noch einige
+              Zeit in Anspruch nehmen.
+            </dd>
+          </div>
+          <div class="faq-item">
+            <dt>Die Decke in der Tiefgarage bröckelt und es sind bereits Steine heruntergefallen. Ist das gefährlich?
+            </dt>
+            <dd>
+              Die Verwaltung ist über die Vorfälle informiert. Es handelt sich wohl um Porenbetonsteine zur Verkleidung
+              von Lüftungskanälen, nicht um tragende Decken-Elemente. Die betroffenen Bereiche wurden laut Verwaltung
+              geprüft und gesichert. Neue lose Teile sollten umgehend gemeldet werden.
+            </dd>
+          </div>
+          <div class="faq-item">
+            <dt>Funktioniert die Außenbeleuchtung (Laternen) auf dem Gelände?</dt>
+            <dd>
+              Die Außenbeleuchtung ist ein bekanntes Problem. Aufgrund eines defekten Erdkabels ist die Funktionalität
+              eingeschränkt. Laut Verwaltung ist die Reparatur beauftragt, ein genauer Zeitplan liegt aber noch nicht
+              vor.
+            </dd>
+          </div>
+        </dl>
+      </section>
+
+      <div id="no-results" class="hidden text-center py-10">
+        <p class="text-lg text-slate-500">Für Ihre Suche wurden keine Ergebnisse gefunden.</p>
+      </div>
+
+    </main>
+
+    <footer class="mt-16 pt-8 border-t border-slate-300 text-center text-slate-500 text-sm">
+      <p>&copy; 2025 Ein Nachbar. Dieses Dokument dient der allgemeinen Information und erhebt keinen Anspruch auf
+        Vollständigkeit oder Richtigkeit.</p>
+      <div class="mt-4 p-3 bg-red-50 border border-red-200 rounded-lg max-w-2xl mx-auto">
+        <p class="text-red-800 text-sm font-medium mb-2">⚠️ <strong>Wichtiger Hinweis zur Nutzung:</strong></p>
+        <p class="text-red-700 text-xs mb-3">
+          Diese FAQ ist unter einer speziellen Community-Lizenz veröffentlicht, die die Nutzung durch die Verwaltung explizit ausschließt.
+        </p>
+        <a href="https://github.com/Tobi-mmt/faq-eidelstedter-hoefe/blob/main/LICENSE.md" 
+           target="_blank" 
+           class="inline-flex items-center text-red-700 font-semibold hover:text-red-800 hover:underline text-xs">
+          <i data-lucide="external-link" class="w-3 h-3 mr-1"></i>
+          Vollständige Lizenz anzeigen
+        </a>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+      // --- Fuzzy Search Setup ---
+      const searchInput = document.getElementById('searchInput');
+      const faqContainer = document.getElementById('faq-container');
+      const allFaqItems = Array.from(faqContainer.querySelectorAll('.faq-item'));
+      const faqSections = Array.from(faqContainer.querySelectorAll('.faq-section'));
+      const noResultsMessage = document.getElementById('no-results');
+
+      const faqData = allFaqItems.map((item, index) => ({
+        id: index,
+        question: item.querySelector('dt').textContent,
+        answer: item.querySelector('dd').textContent,
+        element: item
+      }));
+
+      const fuseOptions = {
+        keys: ['question', 'answer'],
+        includeScore: true,
+        threshold: 0.4,
+        includeMatches: true,
+        minMatchCharLength: 2,
+      };
+      const fuse = new Fuse(faqData, fuseOptions);
+
+      function highlightMatches(text, matches) {
+        const result = [];
+        let lastIndex = 0;
+        matches.sort((a, b) => a[0] - b[0]);
+        matches.forEach(match => {
+          const [start, end] = match;
+          if (start > lastIndex) result.push(text.substring(lastIndex, start));
+          result.push(`<span class="highlight">${text.substring(start, end + 1)}</span>`);
+          lastIndex = end + 1;
+        });
+        if (lastIndex < text.length) result.push(text.substring(lastIndex));
+        return result.join('');
+      }
+
+      function performSearch() {
+        const searchTerm = searchInput.value.trim();
+
+        allFaqItems.forEach(item => {
+          item.style.display = '';
+          const originalData = faqData.find(d => d.element === item);
+          item.querySelector('dt').innerHTML = originalData.question;
+          item.querySelector('dd').innerHTML = originalData.answer;
+        });
+        faqSections.forEach(section => section.style.display = '');
+        noResultsMessage.classList.add('hidden');
+
+        if (searchTerm.length < 2) return;
+
+        const searchResults = fuse.search(searchTerm);
+        const matchedIds = new Set(searchResults.map(result => result.item.id));
+
+        let totalMatches = 0;
+        faqData.forEach(data => {
+          if (matchedIds.has(data.id)) {
+            data.element.style.display = '';
+            totalMatches++;
+            const result = searchResults.find(r => r.item.id === data.id);
+            if (result && result.matches) {
+              result.matches.forEach(match => {
+                const elem = data.element.querySelector(match.key === 'question' ? 'dt' : 'dd');
+                elem.innerHTML = highlightMatches(elem.textContent, match.indices);
               });
-              if (lastIndex < text.length) result.push(text.substring(lastIndex));
-              return result.join('');
+            }
+          } else {
+            data.element.style.display = 'none';
           }
-          
-          function performSearch() {
-              const searchTerm = searchInput.value.trim();
+        });
 
-              allFaqItems.forEach(item => {
-                  item.style.display = '';
-                  const originalData = faqData.find(d => d.element === item);
-                  item.querySelector('dt').innerHTML = originalData.question;
-                  item.querySelector('dd').innerHTML = originalData.answer;
-              });
-              faqSections.forEach(section => section.style.display = '');
-              noResultsMessage.classList.add('hidden');
+        faqSections.forEach(section => {
+          const visibleItems = Array.from(section.querySelectorAll('.faq-item')).filter(item => item.style.display !== 'none');
+          section.style.display = visibleItems.length > 0 ? '' : 'none';
+        });
 
-              if (searchTerm.length < 2) return;
+        noResultsMessage.classList.toggle('hidden', totalMatches > 0);
+      }
 
-              const searchResults = fuse.search(searchTerm);
-              const matchedIds = new Set(searchResults.map(result => result.item.id));
-              
-              let totalMatches = 0;
-              faqData.forEach(data => {
-                  if (matchedIds.has(data.id)) {
-                      data.element.style.display = '';
-                      totalMatches++;
-                      const result = searchResults.find(r => r.item.id === data.id);
-                      if (result && result.matches) {
-                          result.matches.forEach(match => {
-                              const elem = data.element.querySelector(match.key === 'question' ? 'dt' : 'dd');
-                              elem.innerHTML = highlightMatches(elem.textContent, match.indices);
-                          });
-                      }
-                  } else {
-                      data.element.style.display = 'none';
-                  }
-              });
+      searchInput.addEventListener('input', performSearch);
 
-              faqSections.forEach(section => {
-                  const visibleItems = Array.from(section.querySelectorAll('.faq-item')).filter(item => item.style.display !== 'none');
-                  section.style.display = visibleItems.length > 0 ? '' : 'none';
-              });
+      // --- iCal/Müllkalender Setup ---
+      async function loadCalendarData() {
+        const targetDiv = document.getElementById('muell-termine');
 
-              noResultsMessage.classList.toggle('hidden', totalMatches > 0);
-          }
+        // Zeige Lade-Animation
+        targetDiv.innerHTML = `
+                  <div class="flex items-center space-x-2">
+                      <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-teal-700"></div>
+                      <span class="text-slate-600">Lade Termine...</span>
+                  </div>
+              `;
 
-          searchInput.addEventListener('input', performSearch);
+        // Neue Proxy-Liste mit funktionierenden Services
+        const proxyUrls = [
+          'https://corsproxy.io/?',
+          'https://api.codetabs.com/v1/proxy?quest=',
+          'https://cors-anywhere.herokuapp.com/',
+          'https://thingproxy.freeboard.io/fetch/'
+        ];
 
-          // --- iCal/Müllkalender Setup ---
-          async function loadCalendarData() {
-              const targetDiv = document.getElementById('muell-termine');
-              
-              // Versuche zuerst einen CORS-Proxy zu verwenden
-              const proxyUrls = [
-                  'https://api.allorigins.win/raw?url=',
-                  'https://cors-anywhere.herokuapp.com/',
-                  'https://thingproxy.freeboard.io/fetch/'
-              ];
-              
-              const icsUrl = 'https://backend.stadtreinigung.hamburg/kalender/abholtermine.ics?hnIds=372521';
-              let success = false;
+        const icsUrl = 'https://backend.stadtreinigung.hamburg/kalender/abholtermine.ics?hnIds=372521';
+        let success = false;
 
-              for (const proxyUrl of proxyUrls) {
-                  try {
-                      const fullUrl = proxyUrl + encodeURIComponent(icsUrl);
-                      const response = await fetch(fullUrl);
-                      
-                      if (response.ok) {
-                          const icsData = await response.text();
-                          const jcalData = ICAL.parse(icsData);
-                          const component = new ICAL.Component(jcalData);
-                          const events = component.getAllSubcomponents('vevent');
-                          const now = new Date();
+        // Versuche jeden Proxy
+        for (const proxyUrl of proxyUrls) {
+          try {
+            const fullUrl = proxyUrl + encodeURIComponent(icsUrl);
+            console.log(`Try Proxy: ${proxyUrl}`);
 
-                          const upcomingEvents = events
-                              .map(event => {
-                                  const vevent = new ICAL.Event(event);
-                                  return {
-                                      summary: vevent.summary,
-                                      startDate: vevent.startDate.toJSDate()
-                                  };
-                              })
-                              .filter(event => event.startDate >= now)
-                              .sort((a, b) => a.startDate - b.startDate)
-                              .slice(0, 4);
+            const response = await fetch(fullUrl, {
+              method: 'GET',
+              headers: {
+                'Accept': 'text/calendar, text/plain, */*',
+                'User-Agent': 'Mozilla/5.0 (compatible; FAQ-Eidelstedter-Hoefe/1.0)'
+              },
+              timeout: 10000 // 10 Sekunden Timeout
+            });
 
-                          targetDiv.innerHTML = '';
+            if (response.ok) {
+              const icsData = await response.text();
 
-                          if (upcomingEvents.length === 0) {
-                              targetDiv.innerHTML = '<p>Keine zukünftigen Termine im Kalender gefunden.</p>';
-                              return;
-                          }
+              // Check if the data is valid iCal data
+              if (icsData.includes('BEGIN:VCALENDAR') && icsData.includes('VEVENT')) {
+                const jcalData = ICAL.parse(icsData);
+                const component = new ICAL.Component(jcalData);
+                const events = component.getAllSubcomponents('vevent');
+                const now = new Date();
 
-                          const ul = document.createElement('ul');
-                          ul.className = 'list-none space-y-2';
-                          upcomingEvents.forEach(event => {
-                              const li = document.createElement('li');
-                              const dateString = event.startDate.toLocaleDateString('de-DE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-                              li.innerHTML = `<span class="font-semibold text-teal-700">${event.summary}:</span> ${dateString}`;
-                              ul.appendChild(li);
-                          });
-                          targetDiv.appendChild(ul);
-                          success = true;
-                          break;
-                      }
-                  } catch (error) {
-                      console.log(`Proxy ${proxyUrl} fehlgeschlagen:`, error);
-                      continue;
-                  }
+                const upcomingEvents = events
+                  .map(event => {
+                    const vevent = new ICAL.Event(event);
+                    return {
+                      summary: vevent.summary,
+                      startDate: vevent.startDate.toJSDate()
+                    };
+                  })
+                  .filter(event => event.startDate >= now)
+                  .sort((a, b) => a.startDate - b.startDate)
+                  .slice(0, 4);
+
+                if (upcomingEvents.length > 0) {
+                  const ul = document.createElement('ul');
+                  ul.className = 'list-none space-y-2';
+                  upcomingEvents.forEach(event => {
+                    const li = document.createElement('li');
+                    const dateString = event.startDate.toLocaleDateString('de-DE', {
+                      weekday: 'long',
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    });
+                    // Determine icon and color based on the trash type
+                    let iconColor = 'text-teal-700';
+                    if (event.summary.includes('Restmüll')) {
+                      iconColor = 'text-black';
+                    } else if (event.summary.includes('Biotonne')) {
+                      iconColor = 'text-green-600';
+                    } else if (event.summary.includes('Papiertonne')) {
+                      iconColor = 'text-blue-600';
+                    } else if (event.summary.includes('Wertstofftonne') || event.summary.includes('Gelbe')) {
+                      iconColor = 'text-yellow-600';
+                    }
+
+                    li.innerHTML = `
+                                  <div class="flex items-center space-x-2">
+                                      <i data-lucide="trash-2" class="w-4 h-4 ${iconColor}"></i>
+                                      <span class="font-semibold text-teal-700">${event.summary}:</span>&nbsp;${dateString}
+                                  </div>
+                              `;
+                    ul.appendChild(li);
+                  });
+                  targetDiv.innerHTML = '';
+                  targetDiv.appendChild(ul);
+                  // Render icons after dynamic insertion
+                  lucide.createIcons();
+                  success = true;
+                  break;
+                }
               }
+            }
+          } catch (error) {
+            console.log(`Proxy ${proxyUrl} fehlgeschlagen:`, error.message);
+            continue;
+          }
+        }
 
-              if (!success) {
-                  // Fallback: Zeige statische Informationen und Link zum offiziellen Kalender
-                  targetDiv.innerHTML = `
-                      <div class="space-y-2">
-                          <p class="text-slate-600">Aktuelle Termine konnten nicht automatisch geladen werden.</p>
-                          <p class="text-sm text-slate-500">Bitte prüfen Sie den offiziellen Abfuhrkalender:</p>
-                          <a href="https://www.stadtreinigung.hamburg/abfuhrkalender" target="_blank" class="text-teal-700 font-semibold hover:underline">
-                              Stadtreinigung Hamburg Abfallkalender
-                          </a>
-                          <p class="text-xs text-slate-400 mt-2">
-                              Tipp: Die Abholung erfolgt normalerweise wöchentlich, Restmüll und Bio wechseln sich ab.
-                          </p>
+        if (!success) {
+          // Improved fallback with more information
+          const today = new Date();
+          const nextWeek = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000);
+
+          targetDiv.innerHTML = `
+                      <div class="space-y-3">
+                          <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-3">
+                              <p class="text-yellow-800 text-sm">
+                                  <strong>Hinweis:</strong> Aktuelle Termine konnten nicht automatisch geladen werden.
+                              </p>
+                          </div>
+                          
+                          <div class="space-y-2">
+                              <p class="text-slate-600 text-sm">Bitte prüfen Sie den offiziellen Abfuhrkalender:</p>
+                              <a href="https://www.stadtreinigung.hamburg/abfuhrkalender" target="_blank" 
+                                 class="inline-flex items-center text-teal-700 font-semibold hover:underline">
+                                  <i data-lucide="external-link" class="w-4 h-4 mr-1"></i>
+                                  Stadtreinigung Hamburg Abfallkalender
+                              </a>
+                          </div>
+                          
+                          <div class="bg-slate-50 rounded-lg p-3">
+                               <p class="text-xs text-slate-600 font-medium mb-2">📅 Abfuhrrhythmus (basierend auf offiziellem Kalender):</p>
+                               <ul class="text-xs text-slate-500 space-y-2">
+                                   <li class="flex items-center space-x-2">
+                                       <i data-lucide="trash-2" class="w-4 h-4 text-green-600"></i>
+                                       <span><strong>Dienstags:</strong> Grüne Biotonne + Blaue Papiertonne (wöchentlich)</span>
+                                   </li>
+                                   <li class="flex items-center space-x-2">
+                                       <i data-lucide="trash-2" class="w-4 h-4 text-black"></i>
+                                       <span><strong>Mittwochs:</strong> Schwarze Restmülltonne (wöchentlich)</span>
+                                   </li>
+                                   <li class="flex items-center space-x-2">
+                                       <i data-lucide="trash-2" class="w-4 h-4 text-yellow-600"></i>
+                                       <span><strong>Montags:</strong> Gelbe Wertstofftonne/-sack (14-täglich)</span>
+                                   </li>
+                               </ul>
+                           </div>
                       </div>
                   `;
-              }
-          }
+          console.log('Fallback mode activated');
+        }
+      }
+      loadCalendarData();
 
-          loadCalendarData();
-      });
+      // Initialize Lucide Icons
+      lucide.createIcons();
+    });
   </script>
 
 </body>
+
 </html>
