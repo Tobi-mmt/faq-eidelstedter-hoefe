@@ -92,7 +92,7 @@
               </div>
               <div class="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
                 <p class="text-sm text-blue-800 font-medium">
-                  💡 <strong>Wichtiger Tipp:</strong> Die Tonnen werden meist schon am Vortag der Abholung in den
+                  💡 <strong>Wichtig:</strong> Die Tonnen werden meist schon am Vortag der Abholung in den
                   Bereitstellungsraum gebracht.
                 </p>
               </div>
@@ -525,7 +525,6 @@
         for (const proxyUrl of proxyUrls) {
           try {
             const fullUrl = proxyUrl + encodeURIComponent(icsUrl);
-            console.log(`Try Proxy: ${proxyUrl}`);
 
             const response = await fetch(fullUrl, {
               method: 'GET',
@@ -580,27 +579,28 @@
                     } else {
                       dateString = event.startDate.toLocaleDateString('de-DE', {
                         weekday: 'long',
-                        year: 'numeric',
-                        month: 'long',
+                        month: 'short',
                         day: 'numeric'
                       });
                     }
                     // Determine icon and color based on the trash type
                     let iconColor = 'text-teal-700';
-                    if (event.summary.includes('Restmüll')) {
+                    if (event.summary.includes('schwarz')) {
                       iconColor = 'text-black';
-                    } else if (event.summary.includes('Biotonne')) {
+                    } else if (event.summary.includes('grün')) {
                       iconColor = 'text-green-600';
-                    } else if (event.summary.includes('Papiertonne')) {
+                    } else if (event.summary.includes('blau')) {
                       iconColor = 'text-blue-600';
-                    } else if (event.summary.includes('Wertstofftonne') || event.summary.includes('Gelbe')) {
+                    } else if (event.summary.includes('gelb')) {
                       iconColor = 'text-yellow-500';
                     }
+
+                    let replaceRegex = /Abfuhr|tonne|schwarze|grüne|blaue|gelbe|\/-sack/g;
 
                     li.innerHTML = `
                                   <div class="flex items-center space-x-2">
                                       <i data-lucide="trash-2" class="w-4 h-4 ${iconColor}"></i>
-                                      <span class="font-semibold text-teal-700">${event.summary.replace('Abfuhr', '')}:</span>&nbsp;${dateString}
+                                      <span class="font-semibold text-teal-700 ${iconColor}">${event.summary.replace(replaceRegex, '')}:</span>&nbsp;${dateString}
                                   </div>
                               `;
                     ul.appendChild(li);
