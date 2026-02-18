@@ -510,115 +510,106 @@
                   </div>
               `;
 
-        // Neue Proxy-Liste mit funktionierenden Services
-        const proxyUrls = [
-          'https://corsproxy.io/?',
-          'https://api.codetabs.com/v1/proxy?quest=',
-          'https://cors-anywhere.herokuapp.com/',
-          'https://thingproxy.freeboard.io/fetch/'
-        ];
-
-        const icsUrl = 'https://backend.stadtreinigung.hamburg/kalender/abholtermine.ics?hnIds=372521';
+        // Use our own Vercel serverless function as proxy
+        // Check if we're running on a web server (not file://)
+        const isLocalFile = window.location.protocol === 'file:';
         let success = false;
 
-        // Versuche jeden Proxy
-        for (const proxyUrl of proxyUrls) {
+        if (!isLocalFile) {
           try {
-            const fullUrl = proxyUrl + encodeURIComponent(icsUrl);
-
-            const response = await fetch(fullUrl, {
+            // Use relative path for same-origin requests (works on Vercel)
+            const proxyUrl = '/api/calendar';
+            const response = await fetch(proxyUrl, {
               method: 'GET',
               headers: {
-                'Accept': 'text/calendar, text/plain, */*',
-                'User-Agent': 'Mozilla/5.0 (compatible; FAQ-Eidelstedter-Hoefe/1.0)'
-              },
-              timeout: 10000 // 10 Sekunden Timeout
+                'Accept': 'text/calendar, text/plain, */*'
+              }
             });
 
             if (response.ok) {
               const icsData = await response.text();
 
-              // Check if the data is valid iCal data
-              if (icsData.includes('BEGIN:VCALENDAR') && icsData.includes('VEVENT')) {
-                const jcalData = ICAL.parse(icsData);
-                const component = new ICAL.Component(jcalData);
-                const events = component.getAllSubcomponents('vevent');
-                const now = new Date();
+                // Check if the data is valid iCal data
+                if (icsData.includes('BEGIN:VCALENDAR') && icsData.includes('VEVENT')) {
+                  const jcalData = ICAL.parse(icsData);
+                  const component = new ICAL.Component(jcalData);
+                  const events = component.getAllSubcomponents('vevent');
+                  const now = new Date();
 
-                const upcomingEvents = events
-                  .map(event => {
-                    const vevent = new ICAL.Event(event);
-                    return {
-                      summary: vevent.summary,
-                      startDate: vevent.startDate.toJSDate()
-                    };
-                  })
-                  .filter(event => {
-                    // Show events from today onwards (including today)
-                    const eventDate = new Date(event.startDate);
-                    const today = new Date();
-                    return eventDate >= new Date(today.getFullYear(), today.getMonth(), today.getDate());
-                  })
-                  .sort((a, b) => a.startDate - b.startDate)
-                  .slice(0, 4);
+                  const upcomingEvents = events
+                    .map(event => {
+                      const vevent = new ICAL.Event(event);
+                      return {
+                        summary: vevent.summary,
+                        startDate: vevent.startDate.toJSDate()
+                      };
+                    })
+                    .filter(event => {
+                      // Show events from today onwards (including today)
+                      const eventDate = new Date(event.startDate);
+                      const today = new Date();
+                      return eventDate >= new Date(today.getFullYear(), today.getMonth(), today.getDate());
+                    })
+                    .sort((a, b) => a.startDate - b.startDate)
+                    .slice(0, 4);
 
-                if (upcomingEvents.length > 0) {
-                  const ul = document.createElement('ul');
-                  ul.className = 'list-none space-y-2';
-                  upcomingEvents.forEach(event => {
-                    const li = document.createElement('li');
-                    const today = new Date();
-                    const tomorrow = new Date(today);
-                    tomorrow.setDate(tomorrow.getDate() + 1);
+                  if (upcomingEvents.length > 0) {
+                    const ul = document.createElement('ul');
+                    ul.className = 'list-none space-y-2';
+                    upcomingEvents.forEach(event => {
+                      const li = document.createElement('li');
+                      const today = new Date();
+                      const tomorrow = new Date(today);
+                      tomorrow.setDate(tomorrow.getDate() + 1);
 
-                    let dateString;
-                    if (event.startDate.toDateString() === today.toDateString()) {
-                      dateString = 'heute';
-                    } else if (event.startDate.toDateString() === tomorrow.toDateString()) {
-                      dateString = 'morgen';
-                    } else {
-                      dateString = event.startDate.toLocaleDateString('de-DE', {
-                        weekday: 'long',
-                        month: 'short',
-                        day: 'numeric'
-                      });
-                    }
-                    // Determine icon and color based on the trash type
-                    let iconColor = 'text-teal-700';
-                    if (event.summary.includes('schwarz')) {
-                      iconColor = 'text-black';
-                    } else if (event.summary.includes('grün')) {
-                      iconColor = 'text-green-600';
-                    } else if (event.summary.includes('blau')) {
-                      iconColor = 'text-blue-600';
-                    } else if (event.summary.includes('gelb')) {
-                      iconColor = 'text-yellow-500';
-                    }
+                      let dateString;
+                      if (event.startDate.toDateString() === today.toDateString()) {
+                        dateString = 'heute';
+                      } else if (event.startDate.toDateString() === tomorrow.toDateString()) {
+                        dateString = 'morgen';
+                      } else {
+                        dateString = event.startDate.toLocaleDateString('de-DE', {
+                          weekday: 'long',
+                          month: 'short',
+                          day: 'numeric'
+                        });
+                      }
+                      // Determine icon and color based on the trash type
+                      let iconColor = 'text-teal-700';
+                      if (event.summary.includes('schwarz')) {
+                        iconColor = 'text-black';
+                      } else if (event.summary.includes('grün')) {
+                        iconColor = 'text-green-600';
+                      } else if (event.summary.includes('blau')) {
+                        iconColor = 'text-blue-600';
+                      } else if (event.summary.includes('gelb')) {
+                        iconColor = 'text-yellow-500';
+                      }
 
-                    let replaceRegex = /Abfuhr|tonne|schwarze|grüne|blaue|gelbe|\/-sack/g;
+                      let replaceRegex = /Abfuhr|tonne|schwarze|grüne|blaue|gelbe|\/-sack/g;
 
-                    li.innerHTML = `
-                                  <div class="flex items-center space-x-2">
-                                      <i data-lucide="trash-2" class="w-4 h-4 ${iconColor}"></i>
-                                      <span class="font-semibold text-teal-700 ${iconColor}">${event.summary.replace(replaceRegex, '')}:</span>&nbsp;${dateString}
-                                  </div>
-                              `;
-                    ul.appendChild(li);
-                  });
-                  targetDiv.innerHTML = '';
-                  targetDiv.appendChild(ul);
-                  // Render icons after dynamic insertion
-                  lucide.createIcons();
-                  success = true;
-                  calendarLoadSuccess = true;
-                  loadedCalendarData = ul.outerHTML;
-                  break;
+                      li.innerHTML = `
+                                    <div class="flex items-center space-x-2">
+                                        <i data-lucide="trash-2" class="w-4 h-4 ${iconColor}"></i>
+                                        <span class="font-semibold text-teal-700 ${iconColor}">${event.summary.replace(replaceRegex, '')}:</span>&nbsp;${dateString}
+                                    </div>
+                                `;
+                      ul.appendChild(li);
+                    });
+                    targetDiv.innerHTML = '';
+                    targetDiv.appendChild(ul);
+                    // Render icons after dynamic insertion
+                    lucide.createIcons();
+                    success = true;
+                    calendarLoadSuccess = true;
+                    loadedCalendarData = ul.outerHTML;
+                  }
                 }
+              } else {
+                throw new Error(`HTTP error! status: ${response.status}`);
               }
-            }
           } catch (error) {
-            console.log(`Proxy ${proxyUrl} fehlgeschlagen:`, error.message);
-            continue;
+            console.error('Fehler beim Laden des Kalenders:', error.message);
           }
         }
 
